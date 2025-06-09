@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: backend-config
-  namespace: realworld
+  namespace: tonijordanrodriguez6-dev
 data:
   DB_HOST: postgres
   DB_USER: realworld

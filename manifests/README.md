@@ -39,6 +39,6 @@
 ## Recomendaciones
 
 - Verifica el estado tras cada paso:  
-  `oc get all -n realworld`
+  `oc get all -n tonijordanrodriguez6-dev`
 - Personaliza credenciales en los secretos.
 - Todos los manifiestos incluyen `metadata.namespace: tonijordanrodriguez6-dev`.
