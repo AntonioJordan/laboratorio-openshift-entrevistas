@@ -41,4 +41,4 @@
 - Verifica el estado tras cada paso:  
   `oc get all -n realworld`
 - Personaliza credenciales en los secretos.
-- Todos los manifiestos incluyen `metadata.namespace: realworld`.
+- Todos los manifiestos incluyen `metadata.namespace: tonijordanrodriguez6-dev`.
