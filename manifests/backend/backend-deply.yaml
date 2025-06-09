@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: gothinkster/node-express-realworld-example-app
+          image: gothinkster/threalworld/backend:latest
           ports:
             - containerPort: 3000
           envFrom:
