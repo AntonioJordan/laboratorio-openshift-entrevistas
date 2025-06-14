@@ -1,0 +1,19 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: demo-pipeline
+spec:
+  tasks:
+    - name: run-task1
+      taskRef:
+        name: task1
+    - name: run-task2
+      taskRef:
+        name: task2
+      runAfter:
+        - run-task1
+    - name: run-task3
+      taskRef:
+        name: task3
+      runAfter:
+        - run-task2

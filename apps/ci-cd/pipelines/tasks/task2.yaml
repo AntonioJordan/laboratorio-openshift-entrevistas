@@ -1,0 +1,10 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: task2
+spec:
+  steps:
+    - name: step2
+      image: alpine
+      script: |
+        echo "Task 2 ejecutada"
