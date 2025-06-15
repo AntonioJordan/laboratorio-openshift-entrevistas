@@ -1,0 +1,12 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: EventListener
+metadata:
+  name: ci-listener
+spec:
+  serviceAccountName: pipeline
+  triggers:
+    - name: github-push
+      bindings:
+        - ref: github-binding
+      template:
+        ref: ci-template

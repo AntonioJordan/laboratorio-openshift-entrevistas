@@ -1,0 +1,21 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerTemplate
+metadata:
+  name: ci-template
+spec:
+  params:
+    - name: repo-url
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        generateName: ci-run-
+      spec:
+        pipelineRef:
+          name: ci-pipeline
+        params:
+          - name: repo-url
+            value: $(params.repo-url)
+        workspaces:
+          - name: source
+            emptyDir: {}
