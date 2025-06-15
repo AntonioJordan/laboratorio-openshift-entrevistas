@@ -1,0 +1,23 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: full-ci-pipeline-run
+spec:
+  pipelineRef:
+    name: full-ci-pipeline
+  params:
+    - name: repo-url
+      value: "https://github.com/example/repo.git"
+    - name: revision
+      value: "main"
+    - name: image-name
+      value: "docker.io/example/app:latest"
+    - name: feedback-message
+      value: "Pipeline ejecutada con éxito."
+  workspaces:
+    - name: shared-data
+      persistentVolumeClaim:
+        claimName: shared-pvc
+    - name: output-data
+      persistentVolumeClaim:
+        claimName: output-pvc

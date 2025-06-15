@@ -1,19 +1,94 @@
-apiVersion: tekton.dev/v1beta1
+apiVersion: tekton.dev/v1
 kind: Pipeline
 metadata:
-  name: demo-pipeline
+  name: full-ci-pipeline
 spec:
+  params:
+    - name: repo-url
+      type: string
+    - name: revision
+      type: string
+      default: "main"
+    - name: image-name
+      type: string
+    - name: feedback-message
+      type: string
+  workspaces:
+    - name: shared-data
+    - name: output-data
   tasks:
-    - name: run-task1
+    - name: checkout
       taskRef:
-        name: task1
-    - name: run-task2
+        name: checkout-repo
+      params:
+        - name: repo-url
+          value: $(params.repo-url)
+        - name: revision
+          value: $(params.revision)
+      workspaces:
+        - name: source
+          workspace: shared-data
+
+    - name: build
+      runAfter: [checkout]
       taskRef:
-        name: task2
-      runAfter:
-        - run-task1
-    - name: run-task3
+        name: build-image
+      params:
+        - name: image-name
+          value: $(params.image-name)
+      workspaces:
+        - name: source
+          workspace: shared-data
+
+    - name: unit-tests
+      runAfter: [build]
       taskRef:
-        name: task3
-      runAfter:
-        - run-task2
+        name: unit-tests
+      workspaces:
+        - name: source
+          workspace: shared-data
+
+    - name: code-quality
+      runAfter: [unit-tests]
+      taskRef:
+        name: code-quality
+      workspaces:
+        - name: source
+          workspace: shared-data
+
+    - name: integration-tests
+      runAfter: [code-quality]
+      taskRef:
+        name: integration-tests
+      workspaces:
+        - name: source
+          workspace: shared-data
+
+    - name: package
+      runAfter: [integration-tests]
+      taskRef:
+        name: package-artifact
+      workspaces:
+        - name: source
+          workspace: shared-data
+        - name: output
+          workspace: output-data
+
+    - name: push
+      runAfter: [package]
+      taskRef:
+        name: push-to-registry
+      params:
+        - name: image-name
+          value: $(params.image-name)
+      workspaces:
+        - name: source
+          workspace: shared-data
+
+    - name: feedback
+      runAfter: [push]
+      taskRef:
+        name: notify-feedback
+      params:
+        - name: message
+          value: $(params.feedback-message)

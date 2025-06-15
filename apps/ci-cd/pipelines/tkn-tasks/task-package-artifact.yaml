@@ -1,0 +1,14 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: package-artifact
+spec:
+  workspaces:
+    - name: source
+    - name: output
+  steps:
+    - name: package
+      image: busybox
+      script: |
+        #!/bin/sh
+        tar -czf $(workspaces.output.path)/app.tar.gz -C $(workspaces.source.path) .

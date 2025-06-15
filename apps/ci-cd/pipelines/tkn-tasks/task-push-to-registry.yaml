@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: push-to-registry
+spec:
+  params:
+    - name: image-name
+      type: string
+  workspaces:
+    - name: source
+  steps:
+    - name: push
+      image: gcr.io/kaniko-project/executor:latest
+      args:
+        - "--dockerfile=$(workspaces.source.path)/Dockerfile"
+        - "--context=$(workspaces.source.path)"
+        - "--destination=$(params.image-name)"

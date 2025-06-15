@@ -1,0 +1,14 @@
+apiVersion: tekton.dev/v1
+kind: Task
+metadata:
+  name: notify-feedback
+spec:
+  params:
+    - name: message
+      type: string
+  steps:
+    - name: notify
+      image: curlimages/curl
+      script: |
+        #!/bin/sh
+        echo $(params.message)
