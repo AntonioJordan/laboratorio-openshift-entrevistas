@@ -11,8 +11,3 @@ spec:
           ref: github-binding
       template:
         ref: ci-template
-      interceptors:
-        - github:
-            secretRef:
-              secretName: webhook-secret
-              secretKey: secret
