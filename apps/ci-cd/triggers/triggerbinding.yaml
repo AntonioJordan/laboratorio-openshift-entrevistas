@@ -6,3 +6,9 @@ spec:
   params:
     - name: repo-url
       value: $(body.repository.clone_url)
+    - name: revision
+      value: main
+    - name: image-name
+      value: docker.io/example/app:latest
+    - name: feedback-message
+      value: Pipeline ejecutada con éxito.
