@@ -2,6 +2,7 @@ apiVersion: tekton.dev/v1
 kind: Task
 metadata:
   name: notify-feedback
+  namespace: tekton-pipelines
 spec:
   params:
     - name: message

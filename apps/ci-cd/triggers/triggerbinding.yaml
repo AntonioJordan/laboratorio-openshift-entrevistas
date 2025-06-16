@@ -2,12 +2,13 @@ apiVersion: triggers.tekton.dev/v1beta1
 kind: TriggerBinding
 metadata:
   name: github-binding
+  namespace: tekton-pipelines
 spec:
   params:
     - name: repo-url
       value: $(body.repository.clone_url)
     - name: revision
-      value: main
+      value: $(body.pull_request.head.ref)
     - name: image-name
       value: docker.io/example/app:latest
     - name: feedback-message

@@ -2,10 +2,20 @@ apiVersion: triggers.tekton.dev/v1beta1
 kind: EventListener
 metadata:
   name: ci-listener
+  namespace: tekton-pipelines
 spec:
   serviceAccountName: pipeline
+  resources:
+    kubernetesResource:
+      serviceType: LoadBalancer
   triggers:
-    - name: github-push
+    - name: github-pr-trigger
+      interceptors:
+        - ref:
+            name: github
+          params:
+            - name: eventTypes
+              value: ["pull_request"]
       bindings:
         - ref: github-binding
       template:

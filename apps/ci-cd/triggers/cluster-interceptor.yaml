@@ -2,6 +2,7 @@ apiVersion: triggers.tekton.dev/v1beta1
 kind: ClusterInterceptor
 metadata:
   name: github
+  namespace: tekton-pipelines
   annotations:
     tekton.dev/inject-ca: "true"
 spec:

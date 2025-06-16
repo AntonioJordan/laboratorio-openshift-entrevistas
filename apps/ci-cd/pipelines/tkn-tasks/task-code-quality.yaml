@@ -2,6 +2,7 @@ apiVersion: tekton.dev/v1
 kind: Task
 metadata:
   name: code-quality
+  namespace: tekton-pipelines
 spec:
   workspaces:
     - name: source

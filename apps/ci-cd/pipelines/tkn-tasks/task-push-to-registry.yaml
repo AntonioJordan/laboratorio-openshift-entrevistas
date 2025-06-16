@@ -2,6 +2,7 @@ apiVersion: tekton.dev/v1
 kind: Task
 metadata:
   name: push-to-registry
+  namespace: tekton-pipelines
 spec:
   params:
     - name: image-name

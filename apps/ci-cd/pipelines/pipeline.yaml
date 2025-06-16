@@ -2,6 +2,8 @@ apiVersion: tekton.dev/v1
 kind: Pipeline
 metadata:
   name: full-ci-pipeline
+  namespace: tekton-pipelines
+
 spec:
   params:
     - name: repo-url
