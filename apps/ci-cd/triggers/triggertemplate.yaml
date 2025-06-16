@@ -5,6 +5,12 @@ metadata:
 spec:
   params:
     - name: repo-url
+    - name: revision
+      default: main
+    - name: image-name
+      default: docker.io/example/app:latest
+    - name: feedback-message
+      default: Pipeline ejecutada con éxito.
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
@@ -16,6 +22,16 @@ spec:
         params:
           - name: repo-url
             value: $(params.repo-url)
+          - name: revision
+            value: $(params.revision)
+          - name: image-name
+            value: $(params.image-name)
+          - name: feedback-message
+            value: $(params.feedback-message)
         workspaces:
-          - name: source
-            emptyDir: {}
+          - name: shared-data
+            persistentVolumeClaim:
+              claimName: shared-pvc
+          - name: output-data
+            persistentVolumeClaim:
+              claimName: output-pvc
