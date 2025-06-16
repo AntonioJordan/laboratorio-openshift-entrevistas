@@ -5,17 +5,8 @@ metadata:
   namespace: tekton-pipelines
 spec:
   serviceAccountName: pipeline
-  resources:
-    kubernetesResource:
-      serviceType: LoadBalancer
   triggers:
-    - name: github-pr-trigger
-      interceptors:
-        - ref:
-            name: github
-          params:
-            - name: eventTypes
-              value: ["pull_request"]
+    - name: github-push
       bindings:
         - ref: github-binding
       template:

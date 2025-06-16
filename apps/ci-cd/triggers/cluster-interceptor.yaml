@@ -1,5 +1,5 @@
-apiVersion: triggers.tekton.dev/v1beta1
-kind: ClusterInterceptor
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: Interceptor
 metadata:
   name: github
   namespace: tekton-pipelines
@@ -10,5 +10,5 @@ spec:
     service:
       name: tekton-triggers-webhook
       namespace: tekton-pipelines
-      port: 8080  # Cambiado a 8080
+      port: 8080
       path: /github

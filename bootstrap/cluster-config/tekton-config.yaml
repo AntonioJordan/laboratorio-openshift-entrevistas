@@ -1,7 +1,7 @@
-# apiVersion: operator.tekton.dev/v1alpha1
-# kind: TektonConfig
-# metadata:
-#   name: config
-# spec:
-#   pipeline:
-#     metrics.taskrun.duration: true
+apiVersion: operator.tekton.dev/v1beta1
+kind: TektonConfig
+metadata:
+  name: config
+spec:
+  pipeline:
+    metrics.taskrun.duration: true

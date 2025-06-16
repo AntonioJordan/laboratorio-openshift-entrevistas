@@ -1,4 +1,4 @@
-apiVersion: triggers.tekton.dev/v1beta1
+apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerBinding
 metadata:
   name: github-binding
@@ -8,7 +8,7 @@ spec:
     - name: repo-url
       value: $(body.repository.clone_url)
     - name: revision
-      value: $(body.pull_request.head.ref)
+      value: $(body.ref)
     - name: image-name
       value: docker.io/example/app:latest
     - name: feedback-message
