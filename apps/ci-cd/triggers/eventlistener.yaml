@@ -7,7 +7,6 @@ spec:
   triggers:
     - name: github-push
       bindings:
-        - kind: TriggerBinding
-          ref: github-binding
+        - ref: github-binding
       template:
         ref: ci-template
