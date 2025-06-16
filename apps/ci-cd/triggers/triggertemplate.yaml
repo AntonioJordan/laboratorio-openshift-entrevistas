@@ -12,7 +12,7 @@ spec:
         generateName: ci-run-
       spec:
         pipelineRef:
-          name: ci-pipeline
+          name: full-ci-pipeline
         params:
           - name: repo-url
             value: $(params.repo-url)
